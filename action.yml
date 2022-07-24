@@ -22,19 +22,19 @@ inputs:
 outputs:
   access_token:
     description: "The first output string"
-    value: ${{ steps.sfdc_auth.outputs.access_token }}
+    value: ${{ steps.sfdc_rest_call.outputs.access_token }}
   instance_url:
     description: "The second output string"
-    value: ${{ steps.sfdc_auth.outputs.instance_url }}
+    value: ${{ steps.sfdc_rest_call.outputs.instance_url }}
   id:
     description: "The first output string"
-    value: ${{ steps.sfdc_auth.outputs.id }}
+    value: ${{ steps.sfdc_rest_call.outputs.id }}
   error:
     description: "The second output string"
-    value: ${{ steps.sfdc_auth.outputs.error }}
+    value: ${{ steps.sfdc_rest_call.outputs.error }}
   error_description:
     description: "The second output string"
-    value: ${{ steps.sfdc_auth.outputs.error_description }}
+    value: ${{ steps.sfdc_rest_call.outputs.error_description }}
 
 runs:
   using: "composite"
@@ -92,6 +92,6 @@ runs:
         echo ::set-output name=error::${error}
         echo ::set-output name=error_description::${error_description}
         
-        
-    
-
+branding:
+  icon: 'user-check'  
+  color: 'blue'
