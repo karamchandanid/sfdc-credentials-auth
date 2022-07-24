@@ -48,14 +48,11 @@ runs:
       shell: bash
       name: Authenticating User using Rest call
       run: |
-        sfdc_auth_url=$(echo "${{ inputs.login_url}}/services/oauth2/token?grant_type=password&username=${{ inputs.user_name }}&password=${{ inputs.password }}&client_id=${{ inputs.sfdc_client_id }}&client_secret=${{ inputs.sfdc_client_secret }}")
-        echo $sfdc_auth_url
-        echo "${{ inputs.login_url}}/services/oauth2/token?grant_type=password&username=${{ inputs.user_name }}&password=${{ inputs.password }}&client_id=${{ inputs.sfdc_client_id }}&client_secret=${{ inputs.sfdc_client_secret }}"
-        echo "here is user name ${{ inputs.user_name}}"
-        echo "here is user name ${{ inputs.login_url}}"
-        response=$(curl --request POST --url "$sfdc_auth_url" --header 'accept: application/json' ); 
-        # debugging callout response
-        echo $response;
+        sfdc_auth_call=$(echo ${{ inputs.login_url}}/services/oauth2/token -d 'grant_type=password' -d 'client_id=${{ inputs.sfdc_client_id }}' -d 'client_secret=${{ inputs.sfdc_client_secret }}' -d 'username=${{ inputs.user_name }}' -d 'password=${{ inputs.password }}')
+        echo $sfdc_auth_call
+        curl https://MyDomainName.my.salesforce.com/services/oauth2/token -d 'grant_type=password' -d 'client_id=consumer-key' -d 'client_secret=consumer-secret' -d 'username=my-login@domain.com' -d 'password=my-password'
+        echo "authenticating user: ${{ inputs.user_name}} with instance: ${{ inputs.login_url}}"
+        response=$(curl $sfdc_auth_call --header 'accept: application/json' ); 
         
         # ---------------------------------- 
         # Extracing data from response
