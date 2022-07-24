@@ -36,6 +36,24 @@ outputs:
     description: "The second output string"
     value: ${{ jobs.sfdc_auth.outputs.error_description }}
 
+# Mapping the workflow outputs with job outputs
+outputs:
+  access_token:
+    description: "The first output string"
+    value: ${{ steps.sfdc_auth.outputs.access_token }}
+  instance_url:
+    description: "The second output string"
+    value: ${{ steps.sfdc_auth.outputs.instance_url }}
+  id:
+    description: "The first output string"
+    value: ${{ steps.sfdc_auth.outputs.id }}
+  error:
+    description: "The second output string"
+    value: ${{ steps.sfdc_auth.outputs.error }}
+  error_description:
+    description: "The second output string"
+    value: ${{ steps.sfdc_auth.outputs.error_description }}
+
 runs:
   using: "composite"
   steps:
@@ -45,7 +63,55 @@ runs:
         echo Hello ${{ inputs.user_name }}.
         echo Hello ${{ inputs.login_url }}.
     - id: sfdc_rest_call
+      shell: bash
       name: Authenticating User using Rest call
       run: |
-        echo Hello ${{ inputs.user_name }}.
-        echo Hello ${{ inputs.login_url }}.
+        sfdc_auth_url=$(echo "${{ inputs.login_url}}/services/oauth2/token?grant_type=password&username=${{ inputs.user_name }}&password=${{ secrets.password }}&client_id=${{ secrets.sfdc_client_id }}&client_secret=${{ secrets.sfdc_client_secret }}")
+        echo $sfdc_auth_url
+        echo "${{ inputs.login_url}}/services/oauth2/token?grant_type=password&username=${{ inputs.user_name }}&password=${{ secrets.password }}&client_id=${{ secrets.sfdc_client_id }}&client_secret=${{ secrets.sfdc_client_secret }}"
+        echo "here is user name ${{ inputs.user_name}}"
+        echo "here is user name ${{ inputs.login_url}}"
+        response=$(curl --request POST --url "$sfdc_auth_url" --header 'accept: application/json' ); 
+        # debugging callout response
+        echo $response;
+        
+        # ---------------------------------- 
+        # Extracing data from response
+        # ----------------------------------
+        
+        # accesss_token
+        access_token=$(echo $response | jq -r '.access_token');
+        
+        # org instance url
+        instance_url=$(echo $response | jq -r '.instance_url');
+        
+        # salesforce domain/id/<org_id>/<user_id>
+        id=$(echo $response | jq -r '.id');
+        
+        # in case getting error into authentication
+        error=$(echo $response | jq -r '.error');
+        
+        # error_description related to error getting into authentication
+        error_description=$(echo $response | jq -r '.error_description');
+        
+        # Validating access_token if null then terminating process
+        if [[ -z $access_token ]] || [[ $access_token == "null" ]];
+        then 
+          echo "----------------------------------"
+          echo "Error in salesforce authentication"
+          echo "----------------------------------"
+          echo "$error  $error_description"
+          echo ""
+          exit 1;
+        fi
+        
+        # setting up outputs
+        echo ::set-output name=access_token::${access_token}
+        echo ::set-output name=instance_url::${instance_url}
+        echo ::set-output name=id::${id}
+        echo ::set-output name=error::${error}
+        echo ::set-output name=error_description::${error_description}
+        
+        
+    
+
