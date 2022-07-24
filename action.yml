@@ -45,6 +45,7 @@ runs:
         echo Hello ${{ inputs.user_name }}.
         echo Hello ${{ inputs.login_url }}.
     - id: sfdc_rest_call
+      shell: bash
       name: Authenticating User using Rest call
       run: |
         sfdc_auth_url=$(echo "${{ inputs.login_url}}/services/oauth2/token?grant_type=password&username=${{ inputs.user_name }}&password=${{ secrets.password }}&client_id=${{ secrets.sfdc_client_id }}&client_secret=${{ secrets.sfdc_client_secret }}")
