@@ -1,0 +1,28 @@
+name: 'DK Git SalesforceAuthentication'
+description: 'Authentication Salesforce using credential and getting response oauth2 : token '
+
+inputs:
+  user_name:
+    required: true
+    type: string
+  login_url:
+    type: string
+    default: https://login.salesforce.com
+  password:
+    required: true
+    description: combination of <password>:<security_token>
+  sfdc_client_id:
+    required: true
+    description: Consumer Key of a connected App created within salesforce
+  sfdc_client_secret:
+    required: true
+    description: Consumer Secret of a connected App created within salesforce
+
+runs:
+  using: "composite"
+  steps:
+    - name: Dispaly inputs
+      shell: bash
+      run: |
+        echo Hello ${{ inputs.user_name }}.
+        echo Hello ${{ inputs.login_url }}.
