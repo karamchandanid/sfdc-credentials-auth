@@ -1,4 +1,4 @@
-name: 'DK Git SalesforceAuthentication'
+name: 'DK Git Salesforce Authentication'
 description: 'Authentication Salesforce using credential and getting response oauth2 : token '
 
 inputs:
