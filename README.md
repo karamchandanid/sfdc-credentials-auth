@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - uses: karamchandanid/sfdc-credentials-auth@v19
+      - uses: karamchandanid/sfdc-credentials-auth@v1
         id: sfdc_auth
         with:
           sfdc_client_id: ${{ secrets.SFDC_CLIENT_ID }}
