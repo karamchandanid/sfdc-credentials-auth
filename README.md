@@ -10,8 +10,7 @@ This action allows you to Authenticate Salesforce using credential and passing r
 | sfdc_client_secret  | ✅ | The consumer secret of the connected app. To access the consumer secret, from the App Manager, find the connected app and select View from the dropdown. Then click Manage Consumer Details. You're sometimes prompted to verify your identity before you can view the consumer secret. |
 | username            | ✅ | The username of the user that the connected app is imitating. |
 | password            | ✅ | The password of the user that the connected app is imitating. |
-| login_url           | ✖️ | **Production** \| **Developer** \| **Devhub** -- `https://login.salesforce.com` `🟢 default`  |
-| | | **Sandbox** \| **Scratch** \| -- `https://test.salesforce.com` |
+| login_url           | ✖️ | **Production** \| **Developer** \| **Devhub** -- `https://login.salesforce.com` `🟢 default` <br> **Sandbox** \| **Scratch** \| -- `https://test.salesforce.com` <br> **MyDomainName** `https://MyDomainName.my.salesforce.com` |
 
 ## Inputs suggestions
 - sfdc_client_id
