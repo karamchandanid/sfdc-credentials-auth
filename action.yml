@@ -39,11 +39,6 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - name: Dispaly inputs
-      shell: bash
-      run: |
-        echo Hello ${{ inputs.user_name }}.
-        echo Hello ${{ inputs.login_url }}.
     - id: sfdc_rest_call
       shell: bash
       name: Authenticating User using Rest call
