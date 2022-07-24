@@ -13,6 +13,7 @@ This action allows you to Authenticate Salesforce using credential and passing r
 | login_url           | ✖️ | **Production** \| **Developer** \| **Devhub** -- `https://login.salesforce.com` `🟢 default` <br> **Sandbox** \| **Scratch** \| -- `https://test.salesforce.com` <br> **MyDomainName** `https://MyDomainName.my.salesforce.com` |
 
 ## Inputs suggestions
+Use following inputs with **secrets**, [Creating encrypted secrets for a repository](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository) | [Using encrypted secrets in a workflow](https://docs.github.com/en/actions/security-guides/encrypted-secrets#using-encrypted-secrets-in-a-workflow).
 - sfdc_client_id
 - sfdc_client_secret
 - password
