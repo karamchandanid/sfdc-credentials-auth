@@ -22,24 +22,6 @@ inputs:
 outputs:
   access_token:
     description: "The first output string"
-    value: ${{ jobs.sfdc_auth.outputs.access_token }}
-  instance_url:
-    description: "The second output string"
-    value: ${{ jobs.sfdc_auth.outputs.instance_url }}
-  id:
-    description: "The first output string"
-    value: ${{ jobs.sfdc_auth.outputs.id }}
-  error:
-    description: "The second output string"
-    value: ${{ jobs.sfdc_auth.outputs.error }}
-  error_description:
-    description: "The second output string"
-    value: ${{ jobs.sfdc_auth.outputs.error_description }}
-
-# Mapping the workflow outputs with job outputs
-outputs:
-  access_token:
-    description: "The first output string"
     value: ${{ steps.sfdc_auth.outputs.access_token }}
   instance_url:
     description: "The second output string"
