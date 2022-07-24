@@ -74,17 +74,6 @@ runs:
         # error_description related to error getting into authentication
         error_description=$(echo $response | jq -r '.error_description');
         
-        # Validating access_token if null then terminating process
-        if [[ -z $access_token ]] || [[ $access_token == "null" ]];
-        then 
-          echo "----------------------------------"
-          echo "Error in salesforce authentication"
-          echo "----------------------------------"
-          echo "$error  $error_description"
-          echo ""
-          exit 1;
-        fi
-        
         # setting up outputs
         echo ::set-output name=access_token::${access_token}
         echo ::set-output name=instance_url::${instance_url}
