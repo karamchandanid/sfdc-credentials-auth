@@ -48,9 +48,9 @@ runs:
       shell: bash
       name: Authenticating User using Rest call
       run: |
-        sfdc_auth_url=$(echo "${{ inputs.login_url}}/services/oauth2/token?grant_type=password&username=${{ inputs.user_name }}&password=${{ secrets.password }}&client_id=${{ secrets.sfdc_client_id }}&client_secret=${{ secrets.sfdc_client_secret }}")
+        sfdc_auth_url=$(echo "${{ inputs.login_url}}/services/oauth2/token?grant_type=password&username=${{ inputs.user_name }}&password=${{ inputs.password }}&client_id=${{ inputs.sfdc_client_id }}&client_secret=${{ inputs.sfdc_client_secret }}")
         echo $sfdc_auth_url
-        echo "${{ inputs.login_url}}/services/oauth2/token?grant_type=password&username=${{ inputs.user_name }}&password=${{ secrets.password }}&client_id=${{ secrets.sfdc_client_id }}&client_secret=${{ secrets.sfdc_client_secret }}"
+        echo "${{ inputs.login_url}}/services/oauth2/token?grant_type=password&username=${{ inputs.user_name }}&password=${{ inputs.password }}&client_id=${{ inputs.sfdc_client_id }}&client_secret=${{ inputs.sfdc_client_secret }}"
         echo "here is user name ${{ inputs.user_name}}"
         echo "here is user name ${{ inputs.login_url}}"
         response=$(curl --request POST --url "$sfdc_auth_url" --header 'accept: application/json' ); 
