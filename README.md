@@ -2,23 +2,28 @@
 
 This action allows you to Authenticate Salesforce using credential and passing response by performaing `services/oauth2/token`
 
-## Inputs
+- # [Quick Start Prerequisites](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/quickstart_prereq.htm)
+  - Confirm That You Have API Enabled Permission
+  - [Create a Connected App](https://developer.salesforce.com/docs/atlas.en-us.api_iot.meta/api_iot/qs_auth_connected_app.htm)
+  - Get a Consumer Key(`sfdc_client_id`) and a Consumer Secret(`sfdc_client_secret`)
+  
+- ## Inputs
 
-| Inputs              | Required  | Description |
-| :---                | :---:     | :---        |
-| sfdc_client_id      | ✅ | The consumer key of the connected app. To access the consumer key, from the App Manager, find the connected app and select View from the dropdown. Then click Manage Consumer Details. You're sometimes prompted to verify your identity before you can view the consumer key. |
-| sfdc_client_secret  | ✅ | The consumer secret of the connected app. To access the consumer secret, from the App Manager, find the connected app and select View from the dropdown. Then click Manage Consumer Details. You're sometimes prompted to verify your identity before you can view the consumer secret. |
-| username            | ✅ | The username of the user that the connected app is imitating. |
-| password            | ✅ | The password of the user that the connected app is imitating. |
-| login_url           | ✖️ | **Production** \| **Developer** \| **Devhub** -- `https://login.salesforce.com` `🟢 default` <br> **Sandbox** \| **Scratch** \| -- `https://test.salesforce.com` <br> **MyDomainName** `https://MyDomainName.my.salesforce.com` |
+  | Inputs              | Required  | Description |
+  | :---                | :---:     | :---        |
+  | sfdc_client_id      | ✅ | The consumer key of the connected app. To access the consumer key, from the App Manager, find the connected app and select View from the dropdown. Then click Manage Consumer Details. You're sometimes prompted to verify your identity before you can view the consumer key. |
+  | sfdc_client_secret  | ✅ | The consumer secret of the connected app. To access the consumer secret, from the App Manager, find the connected app and select View from the dropdown. Then click Manage Consumer Details. You're sometimes prompted to verify your identity before you can view the consumer secret. |
+  | username            | ✅ | The username of the user that the connected app is imitating. |
+  | password            | ✅ | The password of the user that the connected app is imitating. |
+  | login_url           | ✖️ | **Production** \| **Developer** \| **Devhub** -- `https://login.salesforce.com` `🟢 default` <br> **Sandbox** \| **Scratch** \| -- `https://test.salesforce.com` <br> **MyDomainName** `https://MyDomainName.my.salesforce.com` |
 
-## Inputs suggestions
-Use following inputs with **secrets**, [Creating encrypted secrets for a repository](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository) | [Using encrypted secrets in a workflow](https://docs.github.com/en/actions/security-guides/encrypted-secrets#using-encrypted-secrets-in-a-workflow).
-- sfdc_client_id
-- sfdc_client_secret
-- password
+- ## Inputs suggestions
+  Use following inputs with **secrets**, [Creating encrypted secrets for a repository](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository) | [Using encrypted secrets in a workflow](https://docs.github.com/en/actions/security-guides/encrypted-secrets#using-encrypted-secrets-in-a-workflow).
+  - sfdc_client_id
+  - sfdc_client_secret
+  - password
 
-## Example usage
+- ## Example usage
 
 ```yaml
 # SFDC Authentication + using outputs within next step of the same job + error handling

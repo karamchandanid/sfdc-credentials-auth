@@ -46,8 +46,7 @@ runs:
         echo "----------------------------------"
         echo "Authenticating user: ${{ inputs.user_name}} with instance: ${{ inputs.login_url}}"
         echo "----------------------------------"
-        sfdc_auth_url=$(echo "${{ inputs.login_url}}/services/oauth2/token?grant_type=password&username=${{ inputs.user_name }}&password=${{ inputs.password }}&client_id=${{ inputs.sfdc_client_id }}&client_secret=${{ inputs.sfdc_client_secret }}")
-        response=$(curl --request POST --url "$sfdc_auth_url" --header 'accept: application/json' ); 
+        response=$(curl --request POST --url "${{ inputs.login_url }}/services/oauth2/token?grant_type=password" --data-urlencode "client_id=${{ inputs.sfdc_client_id }}" --data-urlencode "client_secret=${{ inputs.sfdc_client_secret }}" --data-urlencode "username=${{ inputs.user_name }}" --data-urlencode "password=${{ inputs.password }}" --header 'accept: application/json' ); 
         # debugging callout response
         
         # ----------------------------------
